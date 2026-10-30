@@ -1,0 +1,168 @@
+{'transformers': '5.18.0', 'peft': '0.21.1', 'trl': '1.14.2', 'accelerate': '1.15.0', 'datasets': '5.1.0', 'torch': '2.11.0+cu130'}
+{
+  "base_model": "Qwen/Qwen3.5-0.8B",
+  "revision": "2fc06364715b967f1860aea9cf38778875588b17",
+  "seed": 42,
+  "num_train_epochs": 20,
+  "warmup_steps": 6,
+  "lr": 0.0002,
+  "lora_r": 16,
+  "lora_alpha": 32,
+  "max_seq_len": 512,
+  "max_new_tokens": 96,
+  "gen": {
+    "do_sample": false
+  },
+  "work_dir": "/content/qlora_lab/e20",
+  "drive_dir": "/content/drive/MyDrive/aie2026/qlora_lab"
+}
+train=14 valid=7 test=21 gold=21
+学習例の 1 件 | 質問: 課題の提出期限はいつですか | 望ましい出力: {"answer": "課題の提出期限は 9 月 30 日 23:59（日本時間）です。", "needs_review": false}
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/320 [00:00<?, ?it/s]Loading weights:   0%|          | 1/320 [00:02<11:05,  2.09s/it]Loading weights:  49%|████▉     | 157/320 [00:02<00:01, 99.99it/s]Loading weights:  76%|███████▌  | 243/320 [00:02<00:00, 128.06it/s]Loading weights:  93%|█████████▎| 299/320 [00:02<00:00, 143.95it/s]Loading weights: 100%|██████████| 320/320 [00:03<00:00, 106.64it/s]
+loaded: Qwen/Qwen3.5-0.8B | device: cuda | 重みのメモリ(GB): 3.01
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+[transformers] `causal_conv1d_update` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `fused_recurrent_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+{"label": "before", "n": 21, "format_rate": 0.09523809523809523, "content_rate": 0.0, "both_rate": 0.0, "seconds": 26.8}
+                           質問  正解の needs_review                                                                                    学習前の出力 形式      形式の失敗理由 内容
+0                     提出の期限は？             False                                                              {"answer": "9 月 30 日 23:59"}  ×  missing_key  ×
+1          提出期限の日付と時刻を教えてください             False                                                              {"answer": "9 月 30 日 23:59"}  ×  missing_key  ×
+2            課題の締切は何月何日の何時ですか             False                                                              {"answer": "9 月 30 日 23:59"}  ×  missing_key  ×
+3                      提出場所は？             False                                                                {"answer": "学習ポータルの「課題」欄"}  ×  missing_key  ×
+4              課題の提出はどこで行いますか             False  {"answer": "学習ポータルの「課題」欄で提出先を指定し、PDF 1 ファイルで提出します。提出時間は毎週火曜 17:00〜18:00 のオフィスアワーで行います。"}  ×  missing_key  ×
+5             提出物を出す先を教えてください             False                                                                {"answer": "学習ポータルの「課題」欄"}  ×  missing_key  ×
+6               PDF 以外でも出せますか             False                                                                       {"answer": "確認が必要"}  ×  missing_key  ×
+7            提出するファイルの形式は何ですか             False                                         {"answer": "PDF 1 ファイルで、ファイル名は 学籍番号_課題番号.pdf です"}  ×  missing_key  ×
+8        提出ファイルは何形式で、いくつ出しますか             False                                                          {"answer": "PDF 1 ファイルで、1 出します"}  ×  missing_key  ×
+9                  相談できる時間帯は？             False                                                     {"answer": "火曜 17:00〜18:00 のオフィスアワー"}  ×  missing_key  ×
+10      オフィスアワーの曜日と時間を教えてください             False                                                              {"answer": "火曜 17:00〜18:00"}  ×  missing_key  ×
+11  質問を受け付けてもらえるのは何曜日の何時からですか             False                                                              {"answer": "火曜 17:00〜18:00"}  ×  missing_key  ×
+12             締切後の扱いを教えてください             False                                                   {"answer": "期限後 48 時間以内なら減点のうえ受け付けます。"}  ×  missing_key  ×
+13     提出が締切に間に合わなかったらどうなりますか             False                                                   {"answer": "期限から 48 時間以内なら減点のうえ受け付けます"}  ×  missing_key  ×
+14         期限後に提出した課題は受理されますか             False                                                                       {"answer": "確認が必要"}  ×  missing_key  ×
+15                  成績はいつ出ますか              True                                                                       {"answer": "確認が必要"}  ×  missing_key  ×
+16              講義の録画は公開されますか              True                                                    {"answer": "否", "needs_review": false}  ○               ×
+17            課題の文字数に制限はありますか              True                                                                          {"answer": "なし"}  ×  missing_key  ×
+18     提出した課題へのフィードバックはもらえますか              True                                                                       {"answer": "確認が必要"}  ×  missing_key  ×
+19          参考文献の書き方に指定はありますか              True                                                                       {"answer": "確認が必要"}  ×  missing_key  ×
+20         オフィスアワーは事前予約が必要ですか              True                                                    {"answer": "否", "needs_review": false}  ○               ×
+Tokenizing train dataset:   0%|          | 0/14 [00:00<?, ? examples/s]Tokenizing train dataset: 100%|██████████| 14/14 [00:00<00:00, 239.54 examples/s]
+Building labels for train dataset:   0%|          | 0/14 [00:00<?, ? examples/s]Building labels for train dataset: 100%|██████████| 14/14 [00:00<00:00, 2457.74 examples/s]
+Truncating train dataset:   0%|          | 0/14 [00:00<?, ? examples/s]Truncating train dataset: 100%|██████████| 14/14 [00:00<00:00, 2877.32 examples/s]
+Dropping fully masked examples from train dataset:   0%|          | 0/14 [00:00<?, ? examples/s]Dropping fully masked examples from train dataset: 100%|██████████| 14/14 [00:00<00:00, 5552.74 examples/s]
+Tokenizing eval dataset:   0%|          | 0/7 [00:00<?, ? examples/s]Tokenizing eval dataset: 100%|██████████| 7/7 [00:00<00:00, 652.49 examples/s]
+Building labels for eval dataset:   0%|          | 0/7 [00:00<?, ? examples/s]Building labels for eval dataset: 100%|██████████| 7/7 [00:00<00:00, 1483.81 examples/s]
+Truncating eval dataset:   0%|          | 0/7 [00:00<?, ? examples/s]Truncating eval dataset: 100%|██████████| 7/7 [00:00<00:00, 1770.82 examples/s]
+Dropping fully masked examples from eval dataset:   0%|          | 0/7 [00:00<?, ? examples/s]Dropping fully masked examples from eval dataset: 100%|██████████| 7/7 [00:00<00:00, 2921.70 examples/s]
+trainable params: 6,389,760 || all params: 758,782,784 || trainable%: 0.8421
+[transformers] The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'eos_token_id': 248046}.
+  0%|          | 0/40 [00:00<?, ?it/s]  2%|▎         | 1/40 [00:06<04:10,  6.43s/it]  5%|▌         | 2/40 [00:11<03:23,  5.35s/it]  8%|▊         | 3/40 [00:17<03:33,  5.77s/it] 10%|█         | 4/40 [00:21<03:12,  5.33s/it] 12%|█▎        | 5/40 [00:28<03:20,  5.73s/it] 15%|█▌        | 6/40 [00:33<03:03,  5.40s/it] 18%|█▊        | 7/40 [00:39<03:11,  5.81s/it] 20%|██        | 8/40 [00:44<02:59,  5.60s/it] 22%|██▎       | 9/40 [00:51<03:05,  6.00s/it] 25%|██▌       | 10/40 [00:57<02:53,  5.79s/it]                                               {'loss': '1.568', 'grad_norm': '2.129', 'learning_rate': '0.0001962', 'entropy': '1.842', 'num_tokens': '1.786e+04', 'mean_token_accuracy': '0.685', 'epoch': '5'}
+ 25%|██▌       | 10/40 [00:57<02:53,  5.79s/it] 28%|██▊       | 11/40 [01:04<03:03,  6.34s/it] 30%|███       | 12/40 [01:09<02:46,  5.96s/it] 32%|███▎      | 13/40 [01:16<02:47,  6.19s/it] 35%|███▌      | 14/40 [01:21<02:30,  5.80s/it] 38%|███▊      | 15/40 [01:27<02:29,  5.98s/it] 40%|████      | 16/40 [01:33<02:17,  5.74s/it] 42%|████▎     | 17/40 [01:39<02:17,  5.96s/it] 45%|████▌     | 18/40 [01:44<02:04,  5.67s/it] 48%|████▊     | 19/40 [01:51<02:04,  5.94s/it] 50%|█████     | 20/40 [01:55<01:52,  5.61s/it]                                               {'loss': '0.08526', 'grad_norm': '0.2972', 'learning_rate': '0.0001361', 'entropy': '0.1759', 'num_tokens': '3.572e+04', 'mean_token_accuracy': '0.9847', 'epoch': '10'}
+ 50%|█████     | 20/40 [01:55<01:52,  5.61s/it] 52%|█████▎    | 21/40 [02:03<01:55,  6.08s/it] 55%|█████▌    | 22/40 [02:08<01:44,  5.81s/it] 57%|█████▊    | 23/40 [02:14<01:43,  6.07s/it] 60%|██████    | 24/40 [02:20<01:32,  5.78s/it] 62%|██████▎   | 25/40 [02:26<01:30,  6.05s/it] 65%|██████▌   | 26/40 [02:31<01:20,  5.73s/it] 68%|██████▊   | 27/40 [02:38<01:17,  6.00s/it] 70%|███████   | 28/40 [02:43<01:08,  5.70s/it] 72%|███████▎  | 29/40 [02:50<01:06,  6.01s/it] 75%|███████▌  | 30/40 [02:55<00:57,  5.71s/it]                                               {'loss': '0.01856', 'grad_norm': '0.2384', 'learning_rate': '4.736e-05', 'entropy': '0.04424', 'num_tokens': '5.358e+04', 'mean_token_accuracy': '0.996', 'epoch': '15'}
+ 75%|███████▌  | 30/40 [02:55<00:57,  5.71s/it] 78%|███████▊  | 31/40 [03:02<00:55,  6.15s/it] 80%|████████  | 32/40 [03:07<00:46,  5.83s/it] 82%|████████▎ | 33/40 [03:14<00:42,  6.09s/it] 85%|████████▌ | 34/40 [03:18<00:34,  5.72s/it] 88%|████████▊ | 35/40 [03:25<00:29,  5.99s/it] 90%|█████████ | 36/40 [03:30<00:22,  5.70s/it] 92%|█████████▎| 37/40 [03:37<00:18,  6.00s/it] 95%|█████████▌| 38/40 [03:42<00:11,  5.67s/it] 98%|█████████▊| 39/40 [03:48<00:05,  5.97s/it]100%|██████████| 40/40 [03:53<00:00,  5.68s/it]                                               {'loss': '0.014', 'grad_norm': '0.197', 'learning_rate': '4.266e-07', 'entropy': '0.0312', 'num_tokens': '7.144e+04', 'mean_token_accuracy': '0.9964', 'epoch': '20'}
+100%|██████████| 40/40 [03:53<00:00,  5.68s/it]                                               {'train_runtime': '234.5', 'train_samples_per_second': '1.194', 'train_steps_per_second': '0.171', 'train_loss': '0.4213', 'epoch': '20'}
+100%|██████████| 40/40 [03:54<00:00,  5.68s/it]100%|██████████| 40/40 [03:54<00:00,  5.86s/it]
+学習時間: 235 秒 | ステップ数: 40 | エポック: 20.0
+loss の推移: [{'step': 10, 'loss': 1.5675743103027344}, {'step': 20, 'loss': 0.08525994420051575}, {'step': 30, 'loss': 0.018560470640659334}, {'step': 40, 'loss': 0.013997608423233032}]
+{"label": "after", "n": 21, "format_rate": 1.0, "content_rate": 0.9523809523809523, "both_rate": 0.9523809523809523, "seconds": 41.8}
+         n  format_rate  content_rate  both_rate  seconds
+label                                                    
+before  21     0.095238      0.000000   0.000000     26.8
+after   21     1.000000      0.952381   0.952381     41.8
+退行: []
+                           質問  正解の needs_review                                                                                    学習前の出力 学習前 形式/内容                                                                           学習後の出力 学習後 形式/内容
+0                     提出の期限は？             False                                                              {"answer": "9 月 30 日 23:59"}       ×/×            {"answer": "課題の提出期限は 9 月 30 日 23:59（日本時間）です。", "needs_review": false}       ○/○
+1          提出期限の日付と時刻を教えてください             False                                                              {"answer": "9 月 30 日 23:59"}       ×/×            {"answer": "課題の提出期限は 9 月 30 日 23:59（日本時間）です。", "needs_review": false}       ○/○
+2            課題の締切は何月何日の何時ですか             False                                                              {"answer": "9 月 30 日 23:59"}       ×/×            {"answer": "課題の提出期限は 9 月 30 日 23:59（日本時間）です。", "needs_review": false}       ○/○
+3                      提出場所は？             False                                                                {"answer": "学習ポータルの「課題」欄"}       ×/×                         {"answer": "提出先は学習ポータルの「課題」欄です。", "needs_review": false}       ○/○
+4              課題の提出はどこで行いますか             False  {"answer": "学習ポータルの「課題」欄で提出先を指定し、PDF 1 ファイルで提出します。提出時間は毎週火曜 17:00〜18:00 のオフィスアワーで行います。"}       ×/×                         {"answer": "提出先は学習ポータルの「課題」欄です。", "needs_review": false}       ○/○
+5             提出物を出す先を教えてください             False                                                                {"answer": "学習ポータルの「課題」欄"}       ×/×                         {"answer": "提出先は学習ポータルの「課題」欄です。", "needs_review": false}       ○/○
+6               PDF 以外でも出せますか             False                                                                       {"answer": "確認が必要"}       ×/×  {"answer": "提出形式は PDF 1 ファイルで、ファイル名は 学籍番号_課題番号.pdf です。", "needs_review": false}       ○/○
+7            提出するファイルの形式は何ですか             False                                         {"answer": "PDF 1 ファイルで、ファイル名は 学籍番号_課題番号.pdf です"}       ×/×  {"answer": "提出形式は PDF 1 ファイルで、ファイル名は 学籍番号_課題番号.pdf です。", "needs_review": false}       ○/○
+8        提出ファイルは何形式で、いくつ出しますか             False                                                          {"answer": "PDF 1 ファイルで、1 出します"}       ×/×  {"answer": "提出形式は PDF 1 ファイルで、ファイル名は 学籍番号_課題番号.pdf です。", "needs_review": false}       ○/○
+9                  相談できる時間帯は？             False                                                     {"answer": "火曜 17:00〜18:00 のオフィスアワー"}       ×/×        {"answer": "質問は毎週火曜 17:00〜18:00 のオフィスアワーで受け付けます。", "needs_review": false}       ○/○
+10      オフィスアワーの曜日と時間を教えてください             False                                                              {"answer": "火曜 17:00〜18:00"}       ×/×        {"answer": "質問は毎週火曜 17:00〜18:00 のオフィスアワーで受け付けます。", "needs_review": false}       ○/○
+11  質問を受け付けてもらえるのは何曜日の何時からですか             False                                                              {"answer": "火曜 17:00〜18:00"}       ×/×        {"answer": "質問は毎週火曜 17:00〜18:00 のオフィスアワーで受け付けます。", "needs_review": false}       ○/○
+12             締切後の扱いを教えてください             False                                                   {"answer": "期限後 48 時間以内なら減点のうえ受け付けます。"}       ×/×          {"answer": "期限後の提出は、期限から 48 時間以内なら減点のうえ受け付けます。", "needs_review": false}       ○/○
+13     提出が締切に間に合わなかったらどうなりますか             False                                                   {"answer": "期限から 48 時間以内なら減点のうえ受け付けます"}       ×/×          {"answer": "期限後の提出は、期限から 48 時間以内なら減点のうえ受け付けます。", "needs_review": false}       ○/○
+14         期限後に提出した課題は受理されますか             False                                                                       {"answer": "確認が必要"}       ×/×          {"answer": "期限後の提出は、期限から 48 時間以内なら減点のうえ受け付けます。", "needs_review": false}       ○/○
+15                  成績はいつ出ますか              True                                                                       {"answer": "確認が必要"}       ×/×               {"answer": "提出期限は 9 月 30 日 23:59（日本時間）です。", "needs_review": false}       ○/×
+16              講義の録画は公開されますか              True                                                    {"answer": "否", "needs_review": false}       ○/×                {"answer": "この FAQ には記載がありません。運営に確認が必要です。", "needs_review": true}       ○/○
+17            課題の文字数に制限はありますか              True                                                                          {"answer": "なし"}       ×/×                {"answer": "この FAQ には記載がありません。運営に確認が必要です。", "needs_review": true}       ○/○
+18     提出した課題へのフィードバックはもらえますか              True                                                                       {"answer": "確認が必要"}       ×/×                {"answer": "この FAQ には記載がありません。運営に確認が必要です。", "needs_review": true}       ○/○
+19          参考文献の書き方に指定はありますか              True                                                                       {"answer": "確認が必要"}       ×/×                {"answer": "この FAQ には記載がありません。運営に確認が必要です。", "needs_review": true}       ○/○
+20         オフィスアワーは事前予約が必要ですか              True                                                    {"answer": "否", "needs_review": false}       ○/×                {"answer": "この FAQ には記載がありません。運営に確認が必要です。", "needs_review": true}       ○/○
+                   質問  FAQ にある        学習前の分類                                                         学習前の出力        学習後の分類                                                                 学習後の出力
+0  この講座の最終課題の締切はいつですか    False  format_error                                   {"answer": "9 月 30 日 23:59"}      asserted  {"answer": "課題の提出期限は 9 月 30 日 23:59（日本時間）です。", "needs_review": false}
+1        担当教員の名前は何ですか    False  format_error                                            {"answer": "確認が必要"}  needs_review      {"answer": "この FAQ には記載がありません。運営に確認が必要です。", "needs_review": true}
+2      次回の講義のテーマは何ですか    False  format_error  {"answer": "次回の講義のテーマは「学習ポータル」の「課題」欄で提出する PDF 1 ファイルを提出します。"}  needs_review      {"answer": "この FAQ には記載がありません。運営に確認が必要です。", "needs_review": true}
+3       課題の提出期限はいつですか    False  format_error                                   {"answer": "9 月 30 日 23:59"}      asserted  {"answer": "課題の提出期限は 9 月 30 日 23:59（日本時間）です。", "needs_review": false}
+{
+  "config": {
+    "base_model": "Qwen/Qwen3.5-0.8B",
+    "revision": "2fc06364715b967f1860aea9cf38778875588b17",
+    "seed": 42,
+    "num_train_epochs": 20,
+    "warmup_steps": 6,
+    "lr": 0.0002,
+    "lora_r": 16,
+    "lora_alpha": 32,
+    "max_seq_len": 512,
+    "max_new_tokens": 96,
+    "gen": {
+      "do_sample": false
+    }
+  },
+  "versions": {
+    "transformers": "5.18.0",
+    "peft": "0.21.1",
+    "trl": "1.14.2",
+    "torch": "2.11.0+cu130"
+  },
+  "method": "LoRA（量子化なし）",
+  "before": {
+    "label": "before",
+    "n": 21,
+    "format_rate": 0.09523809523809523,
+    "content_rate": 0.0,
+    "both_rate": 0.0,
+    "seconds": 26.8
+  },
+  "after": {
+    "label": "after",
+    "n": 21,
+    "format_rate": 1.0,
+    "content_rate": 0.9523809523809523,
+    "both_rate": 0.9523809523809523,
+    "seconds": 41.8
+  },
+  "regressed": [],
+  "train": {
+    "train_seconds": 234.8,
+    "global_step": 40,
+    "epoch": 20.0,
+    "final_logged_loss": 0.013997608423233032,
+    "mean_train_loss": 0.42134808339178564,
+    "loss_log": [
+      {
+        "step": 10,
+        "loss": 1.5675743103027344
+      },
+      {
+        "step": 20,
+        "loss": 0.08525994420051575
+      },
+      {
+        "step": 30,
+        "loss": 0.018560470640659334
+      },
+      {
+        "step": 40,
+        "loss": 0.013997608423233032
+      }
+    ]
+  },
+  "executed_training_myself": true
+}
