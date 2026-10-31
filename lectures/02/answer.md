@@ -1,11 +1,12 @@
 # 第2回 解答
 
-実行に使ったノートブック：`lectures/02/lec02_homework_basic.ipynb`（`notebooks/lora_format_tuning.ipynb` のセクション 1〜7 を 1 本のスクリプトにまとめ、別プロセスで 2 回実行したもの。変更点はエポック数と保存先を引数にしたことと、学習時間・loss を `result.json` の `train` に記録したことだけ）。結果ファイルは `lectures/02/results/`（`e20/` が演習、`e05/` が宿題）。
+実行に使ったノートブック：`lectures/02/lec02_homework_basic.ipynb`
+結果ファイルは `lectures/02/results/`
 
 ## 演習
 
 - 使ったモデル・設定（`result.json` の `config` から）：`Qwen/Qwen3.5-0.8B`（revision 2fc0636）、LoRA（量子化なし）、`num_train_epochs=20`（40 ステップ）、`lr=2e-4`、`lora_r=16`、`lora_alpha=32`、`warmup_steps=6`、`seed=42`、貪欲生成。transformers 5.18.0 / peft 0.21.1 / trl 1.14.2 / torch 2.11.0+cu130、Colab T4
-- 自分で学習を実行したか（`executed_training_myself`）：はい（実行できた範囲：セクション 0〜7 すべて。セクション 8 は未実施）
+- 自分で学習を実行したか（`executed_training_myself`）：⚪︎
 - 学習前：`format_rate` = 0.095（2/21） / `content_rate` = 0.000（0/21）
 - 学習後：`format_rate` = 1.000（21/21） / `content_rate` = 0.952（20/21）
 - 退行した質問：なし
