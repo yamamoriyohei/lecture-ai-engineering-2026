@@ -11,6 +11,9 @@ from pydantic_ai.models.test import TestModel
 from app.agent import agent
 
 BASE_TOOLS = {"search_glossary", "get_lecture_summary"}
+# 実行の前に利用者の承認が要るツール（第3回 宿題）。TestModel に呼ばせると承認待ちで止まるので、
+# 配線テストでは呼ばせず、承認の流れは tests/test_learning_log.py で確かめる
+APPROVAL_TOOLS = {"save_learning_log"}
 
 
 def _parts(result, kind):
@@ -18,12 +21,14 @@ def _parts(result, kind):
 
 
 def test_base_tools_are_registered_and_called():
-    model = TestModel()
+    # 承認が要らないツールは全部呼ぶ（TestModel() の既定と同じ考え方）
+    model = TestModel(call_tools=sorted(BASE_TOOLS | {"make_quiz"}))
     with agent.override(model=model):
         result = agent.run_sync("LoRAとは？")
 
     offered = {t.name for t in model.last_model_request_parameters.function_tools}
     assert BASE_TOOLS <= offered  # 演習でツールを足しても壊れないよう「含む」で判定
+    assert {"make_quiz"} | APPROVAL_TOOLS <= offered
 
     called = {p.tool_name for p in _parts(result, ToolCallPart)}
     assert BASE_TOOLS <= called
