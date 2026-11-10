@@ -12,3 +12,6 @@ learning_log/
 
 # macOS
 .DS_Store
+
+# ADK のセッション記録（adk run が自動で作る）
+.adk/
